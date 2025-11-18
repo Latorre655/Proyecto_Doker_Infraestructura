@@ -2,45 +2,102 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Proyecto Infraestructura</title>
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            display: grid; 
-            place-items: center; 
-            min-height: 90vh; 
-            background-color: #f0f2f5; 
-            color: #333;
-        }
-        .container { 
-            padding: 40px 50px; 
-            background: #ffffff; 
-            border-radius: 10px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
-            text-align: center;
-        }
-        h1 { 
-            color: #007BFF; /* Un color azul 'infra' */
-        }
-        p { 
-            font-size: 1.2rem; 
-        }
-        .docker-logo {
-            width: 100px;
-            margin-bottom: 20px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos Perdidos - Campus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg" alt="Docker Logo" class="docker-logo">
-        
-        <h1>¡Proyecto de Infraestructura Desplegado!</h1>
-        <p>Este sitio HTML está siendo servido desde un contenedor <strong>Nginx</strong>.</p>
-        <p>El despliegue fue automático desde <strong>GitHub</strong> a <strong>Render</strong>.</p>
-        <hr>
-        <p><b>Estudiante:</b> Johan Andrés Latorre Dulcey</p>
-        <p><b>Carnet:</b> U00182602</p>
-    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            🔍 CampusLost&Found
+        </div>
+        <a href="#" class="btn-reportar">+ Reportar Objeto</a>
+    </nav>
+
+    <header class="hero">
+        <h1>¿Perdiste algo en la U?</h1>
+        <p>Reporta objetos perdidos o encuentra lo que dejaste olvidado en los salones.</p>
+        <div class="search-box">
+            <input type="text" placeholder="Ej: Termo azul, Carnet, Calculadora...">
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">Últimos Reportes</h2>
+
+        <div class="grid">
+            
+            <article class="card">
+                <img src="https://via.placeholder.com/400x250/ef4444/ffffff?text=Mochila+Negra" alt="Mochila perdida" class="card-image">
+                <div class="card-content">
+                    <span class="badge badge-lost">Perdido</span>
+                    <h3 class="card-title">Mochila Totto Negra</h3>
+                    <div class="card-info">
+                        <span class="icon-pin"></span> Edificio de Ingenierías, Salón 304
+                    </div>
+                    <div class="card-info">
+                        <span class="icon-calendar"></span> Hoy, 10:00 AM
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn-contact">Tengo información</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://via.placeholder.com/400x250/10b981/ffffff?text=Calculadora+Casio" alt="Calculadora encontrada" class="card-image">
+                <div class="card-content">
+                    <span class="badge badge-found">Encontrado</span>
+                    <h3 class="card-title">Calculadora Casio</h3>
+                    <div class="card-info">
+                        <span class="icon-pin"></span> Cafetería Central
+                    </div>
+                    <div class="card-info">
+                        <span class="icon-calendar"></span> Ayer, 2:30 PM
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn-contact">Es mía</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://via.placeholder.com/400x250/ef4444/ffffff?text=Airpods" alt="Airpods perdidos" class="card-image">
+                <div class="card-content">
+                    <span class="badge badge-lost">Perdido</span>
+                    <h3 class="card-title">Estuche de Airpods</h3>
+                    <div class="card-info">
+                        <span class="icon-pin"></span> Biblioteca, Piso 2
+                    </div>
+                    <div class="card-info">
+                        <span class="icon-calendar"></span> 15 Nov
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn-contact">Tengo información</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="https://via.placeholder.com/400x250/10b981/ffffff?text=Termo+Metalico" alt="Termo encontrado" class="card-image">
+                <div class="card-content">
+                    <span class="badge badge-found">Encontrado</span>
+                    <h3 class="card-title">Termo Metálico Azul</h3>
+                    <div class="card-info">
+                        <span class="icon-pin"></span> Canchas de Fútbol
+                    </div>
+                    <div class="card-info">
+                        <span class="icon-calendar"></span> 14 Nov
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn-contact">Es mío</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
 </body>
 </html>
