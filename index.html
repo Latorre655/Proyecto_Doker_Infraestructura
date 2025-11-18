@@ -55,7 +55,7 @@
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            display: none; 
+            display: none;
             justify-content: center; align-items: center;
             z-index: 1000;
             backdrop-filter: blur(3px);
@@ -67,6 +67,8 @@
             width: 90%; max-width: 500px;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
             animation: slideIn 0.3s ease-out;
+            max-height: 90vh; 
+            overflow-y: auto;
         }
         @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
@@ -76,8 +78,17 @@
         
         .form-group { margin-bottom: 1rem; }
         .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
-        .form-group input, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; font-family: inherit; box-sizing: border-box; }
+        .form-group input[type="text"], 
+        .form-group select,
+        .form-group input[type="file"] { 
+            width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; font-family: inherit; box-sizing: border-box; 
+        }
         
+        .form-group input[type="file"] {
+            background-color: #f9fafb;
+            cursor: pointer;
+        }
+
         .btn-submit { width: 100%; background-color: var(--primary); color: white; padding: 0.75rem; border: none; border-radius: 6px; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 1rem; }
         .btn-submit:hover { background-color: #1d4ed8; }
     </style>
@@ -122,29 +133,6 @@
                     <div class="card-footer"><a href="#" class="btn-contact">Es mía</a></div>
                 </div>
             </article>
-
-            <article class="card">
-                <img src="https://via.placeholder.com/400x250/ef4444/ffffff?text=Airpods" class="card-image">
-                <div class="card-content">
-                    <span class="badge badge-lost">Perdido</span>
-                    <h3 class="card-title">Estuche de Airpods</h3>
-                    <div class="card-info"><span class="icon-pin"></span> Biblioteca, Piso 2</div>
-                    <div class="card-info"><span class="icon-calendar"></span> 15 Nov</div>
-                    <div class="card-footer"><a href="#" class="btn-contact">Tengo información</a></div>
-                </div>
-            </article>
-
-            <article class="card">
-                <img src="https://via.placeholder.com/400x250/10b981/ffffff?text=Termo" class="card-image">
-                <div class="card-content">
-                    <span class="badge badge-found">Encontrado</span>
-                    <h3 class="card-title">Termo Metálico Azul</h3>
-                    <div class="card-info"><span class="icon-pin"></span> Canchas de Fútbol</div>
-                    <div class="card-info"><span class="icon-calendar"></span> 14 Nov</div>
-                    <div class="card-footer"><a href="#" class="btn-contact">Es mío</a></div>
-                </div>
-            </article>
-
         </div>
     </main>
 
@@ -166,6 +154,12 @@
                         <option value="found">Lo encontré</option>
                     </select>
                 </div>
+                
+                <div class="form-group">
+                    <label>Foto del objeto (Opcional)</label>
+                    <input type="file" id="itemImage" accept="image/*">
+                </div>
+
                 <div class="form-group">
                     <label>Lugar</label>
                     <input type="text" id="itemLocation" placeholder="Ej: Baños del edificio A" required>
@@ -176,14 +170,13 @@
     </div>
 
     <script>
+    
         function filterItems() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const cards = document.querySelectorAll('.card');
-
             cards.forEach(card => {
                 const title = card.querySelector('.card-title').innerText.toLowerCase();
                 const location = card.querySelector('.card-info').innerText.toLowerCase();
-                
                 if (title.includes(query) || location.includes(query)) {
                     card.style.display = 'flex';
                 } else {
@@ -193,35 +186,35 @@
         }
 
         const modal = document.getElementById('reportModal');
-
-        function openModal() {
-            modal.classList.add('active');
-        }
-
-        function closeModal() {
-            modal.classList.remove('active');
-        }
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
+        function openModal() { modal.classList.add('active'); }
+        function closeModal() { modal.classList.remove('active'); }
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
         function addItem(event) {
-            event.preventDefault(); 
+            event.preventDefault();
 
             const title = document.getElementById('itemTitle').value;
             const type = document.getElementById('itemType').value;
             const location = document.getElementById('itemLocation').value;
+            const imageInput = document.getElementById('itemImage');
             
             const isLost = type === 'lost';
             const badgeClass = isLost ? 'badge-lost' : 'badge-found';
             const badgeText = isLost ? 'Perdido' : 'Encontrado';
             const btnText = isLost ? 'Tengo información' : 'Es mío';
-            const imgColor = isLost ? 'ef4444' : '10b981'; 
+            const defaultColor = isLost ? 'ef4444' : '10b981'; 
+
+            let imageUrl;
+            if (imageInput.files && imageInput.files[0]) {
+             
+                imageUrl = URL.createObjectURL(imageInput.files[0]);
+            } else {
+                imageUrl = `https://via.placeholder.com/400x250/${defaultColor}/ffffff?text=${encodeURIComponent(title)}`;
+            }
 
             const newCardHTML = `
                 <article class="card">
-                    <img src="https://via.placeholder.com/400x250/${imgColor}/ffffff?text=${encodeURIComponent(title)}" class="card-image">
+                    <img src="${imageUrl}" class="card-image">
                     <div class="card-content">
                         <span class="badge ${badgeClass}">${badgeText}</span>
                         <h3 class="card-title">${title}</h3>
@@ -229,7 +222,7 @@
                             <span class="icon-pin"></span> ${location}
                         </div>
                         <div class="card-info">
-                            <span class="icon-calendar"></span> Hace un momento
+                            <span class="icon-calendar"></span> Ahora mismo
                         </div>
                         <div class="card-footer">
                             <a href="#" class="btn-contact">${btnText}</a>
@@ -243,8 +236,7 @@
 
             closeModal();
             event.target.reset();
-            
-            alert("¡Reporte publicado con éxito!");
+            alert("¡Reporte con foto publicado!");
         }
     </script>
 
