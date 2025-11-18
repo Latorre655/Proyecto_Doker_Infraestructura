@@ -3,148 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Objetos Perdidos - Campus</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Objetos Perdidos - UNAB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #2563eb;
-            --bg: #f3f4f6;
+            --primary: #F59E0B;
+            --primary-dark: #D97706;
+            --bg: #F9FAFB;
             --card-bg: #ffffff;
-            --text-dark: #1f2937;
-            --text-light: #6b7280;
-            --danger: #ef4444;
-            --success: #10b981;
+            --text-dark: #111827;
+            --text-light: #6B7280;
+            --danger: #EF4444;
+            --success: #10B981;
         }
 
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text-dark); margin: 0; padding: 0; line-height: 1.5; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--text-dark); margin: 0; padding: 0; line-height: 1.5; }
 
-        .navbar { background-color: var(--card-bg); padding: 1rem 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-        .logo { font-weight: 700; font-size: 1.25rem; color: var(--primary); display: flex; align-items: center; gap: 8px; cursor: pointer; }
-        .btn-reportar { background-color: var(--primary); color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: background 0.3s; cursor: pointer; border: none; font-size: 1rem; }
-        .btn-reportar:hover { background-color: #1d4ed8; }
+        .navbar { background-color: var(--card-bg); padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--primary); }
+        
+        .logo-container { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .logo-text { font-weight: 700; font-size: 1.5rem; color: var(--primary); letter-spacing: -0.5px; }
+        .logo-sub { color: var(--text-light); font-weight: 400; font-size: 0.9rem; margin-left: 5px; }
 
-        .hero { text-align: center; padding: 3rem 1rem; max-width: 800px; margin: 0 auto; }
-        .hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-        .hero p { color: var(--text-light); margin-bottom: 1.5rem; }
+        .btn-reportar { background-color: var(--primary); color: white; padding: 0.6rem 1.2rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s; cursor: pointer; border: none; font-size: 0.95rem; box-shadow: 0 2px 5px rgba(245, 158, 11, 0.3); }
+        .btn-reportar:hover { background-color: var(--primary-dark); transform: translateY(-1px); }
+
+        .hero { text-align: center; padding: 4rem 1rem; max-width: 800px; margin: 0 auto; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--text-dark); letter-spacing: -1px; }
+        .hero span { color: var(--primary); }
+        .hero p { color: var(--text-light); margin-bottom: 2rem; font-size: 1.1rem; }
+        
         .search-box { display: flex; gap: 10px; justify-content: center; }
-        .search-box input { padding: 0.75rem; width: 100%; max-width: 400px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; outline: none; transition: border-color 0.2s; }
+        .search-box input { padding: 1rem; width: 100%; max-width: 500px; border: 2px solid #E5E7EB; border-radius: 10px; font-size: 1rem; outline: none; transition: border-color 0.2s; font-family: inherit; }
         .search-box input:focus { border-color: var(--primary); }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        .section-title { font-size: 1.5rem; margin-bottom: 1.5rem; border-left: 4px solid var(--primary); padding-left: 1rem; }
+        .section-title { font-size: 1.5rem; margin-bottom: 2rem; border-left: 5px solid var(--primary); padding-left: 1rem; font-weight: 700; }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
 
-        .card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
-        .card-image { width: 100%; height: 200px; background-color: #e5e7eb; object-fit: cover; }
-        .card-content { padding: 1.25rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .card { background-color: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); transition: all 0.3s ease; display: flex; flex-direction: column; cursor: pointer; border: 1px solid #F3F4F6; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); border-color: var(--primary); }
+        .card-image { width: 100%; height: 220px; background-color: #e5e7eb; object-fit: cover; }
+        .card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; pointer-events: none; }
         
-        .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 99px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; width: fit-content; }
-        .badge-lost { background-color: #fee2e2; color: var(--danger); }
-        .badge-found { background-color: #d1fae5; color: var(--success); }
+        .badge { display: inline-block; padding: 0.35rem 0.85rem; border-radius: 99px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.75rem; width: fit-content; letter-spacing: 0.5px; }
+        .badge-lost { background-color: #FEF2F2; color: var(--danger); border: 1px solid #FECACA; }
+        .badge-found { background-color: #ECFDF5; color: var(--success); border: 1px solid #A7F3D0; }
         
-        .card-title { font-size: 1.1rem; font-weight: 600; margin: 0 0 0.5rem 0; }
-        .card-info { font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.25rem; display: flex; align-items: center; gap: 5px; }
-        .card-footer { margin-top: auto; padding-top: 1rem; border-top: 1px solid #e5e7eb; }
-        .btn-contact { display: block; width: 100%; padding: 0.5rem; text-align: center; background-color: white; border: 1px solid #d1d5db; border-radius: 6px; color: var(--text-dark); font-weight: 600; text-decoration: none; transition: all 0.2s; box-sizing: border-box; }
-        .btn-contact:hover { background-color: var(--bg); border-color: var(--text-dark); }
-        .icon-pin::before { content: "📍"; }
-        .icon-calendar::before { content: "📅"; }
+        .card-title { font-size: 1.15rem; font-weight: 700; margin: 0 0 0.5rem 0; color: var(--text-dark); }
+        .card-info { font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 6px; }
+        
+        .card-footer { margin-top: auto; padding-top: 1.25rem; border-top: 1px solid #F3F4F6; pointer-events: auto; }
+        .btn-contact { display: block; width: 100%; padding: 0.75rem; text-align: center; background-color: white; border: 2px solid #E5E7EB; border-radius: 8px; color: var(--text-dark); font-weight: 700; text-decoration: none; transition: all 0.2s; box-sizing: border-box; font-size: 0.9rem; }
+        .btn-contact:hover { border-color: var(--primary); color: var(--primary); background-color: #FFFBEB; }
 
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center; align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(3px);
-        }
+        .icon-pin::before { content: "📍"; }
+        .icon-calendar::before { content: "📅";}
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.7); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(4px); }
         .modal-overlay.active { display: flex; }
 
-        .modal-content {
-            background: white; padding: 2rem; border-radius: 12px;
-            width: 90%; max-width: 500px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            animation: slideIn 0.3s ease-out;
-            max-height: 90vh; 
-            overflow-y: auto;
-        }
+        .modal-content { background: white; padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 550px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: slideIn 0.3s ease-out; max-height: 90vh; overflow-y: auto; position: relative; }
         @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-        .modal-header h2 { margin: 0; font-size: 1.5rem; }
-        .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-light); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid #F3F4F6; padding-bottom: 1rem; }
+        .modal-header h2 { margin: 0; font-size: 1.5rem; color: var(--primary); font-weight: 700; }
+        .close-btn { background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--text-light); line-height: 1; padding: 0; }
+        .close-btn:hover { color: var(--danger); }
         
-        .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
-        .form-group input[type="text"], 
-        .form-group select,
-        .form-group input[type="file"] { 
-            width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; font-family: inherit; box-sizing: border-box; 
-        }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--text-dark); }
+        .form-group input[type="text"], .form-group select, .form-group input[type="file"] { width: 100%; padding: 0.85rem; border: 2px solid #E5E7EB; border-radius: 8px; font-family: inherit; box-sizing: border-box; font-size: 0.95rem; transition: border-color 0.2s; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--primary); outline: none; }
+        .form-group input[type="file"] { background-color: #F9FAFB; padding: 0.6rem; }
         
-        .form-group input[type="file"] {
-            background-color: #f9fafb;
-            cursor: pointer;
-        }
+        .btn-submit { width: 100%; background-color: var(--primary); color: white; padding: 1rem; border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; margin-top: 1rem; transition: background 0.3s; }
+        .btn-submit:hover { background-color: var(--primary-dark); }
 
-        .btn-submit { width: 100%; background-color: var(--primary); color: white; padding: 0.75rem; border: none; border-radius: 6px; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 1rem; }
-        .btn-submit:hover { background-color: #1d4ed8; }
+        #detailImage { width: 100%; height: auto; border-radius: 12px; margin-bottom: 1.5rem; display: block; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .detail-row { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; color: var(--text-dark); font-size: 1rem; }
+        .detail-label { font-weight: 600; width: 80px; color: var(--text-light); }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo" onclick="window.scrollTo(0,0)">🔍 CampusLost&Found</div>
-        <button class="btn-reportar" onclick="openModal()">+ Reportar Objeto</button>
+        <div class="logo-container" onclick="window.scrollTo(0,0)">
+            <div class="logo-text">UNAB</div>
+            <div class="logo-sub">Objetos Perdidos</div>
+        </div>
+        <button class="btn-reportar" onclick="openFormModal()">+ Nuevo Reporte</button>
     </nav>
 
     <header class="hero">
-        <h1>¿Perdiste algo en la U?</h1>
-        <p>Reporta objetos perdidos o encuentra lo que dejaste olvidado.</p>
+        <h1>¿Olvidaste algo en el <span>Campus</span>?</h1>
+        <p>La plataforma oficial de estudiantes para reportar y recuperar objetos perdidos.</p>
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Ej: Termo azul, Carnet, Calculadora..." onkeyup="filterItems()">
+            <input type="text" id="searchInput" placeholder="Buscar: Carnet, Calculadora, Termo..." onkeyup="filterItems()">
         </div>
     </header>
 
     <main class="container">
-        <h2 class="section-title">Últimos Reportes</h2>
+        <h2 class="section-title">Reportes Recientes</h2>
         <div class="grid" id="itemsGrid">
             
-            <article class="card">
-                <img src="https://via.placeholder.com/400x250/ef4444/ffffff?text=Mochila" class="card-image">
+            <article class="card" onclick="verDetalle(this)">
+                <img src="https://i.pinimg.com/736x/0b/db/cf/0bdbcf64412c4f396926c42afd895516.jpg" class="card-image">
                 <div class="card-content">
                     <span class="badge badge-lost">Perdido</span>
                     <h3 class="card-title">Mochila Totto Negra</h3>
                     <div class="card-info"><span class="icon-pin"></span> Edificio Ingenierías</div>
                     <div class="card-info"><span class="icon-calendar"></span> Hoy, 10:00 AM</div>
-                    <div class="card-footer"><a href="#" class="btn-contact">Tengo información</a></div>
+                    <div class="card-footer"><button class="btn-contact">Ver Información</button></div>
                 </div>
             </article>
 
-            <article class="card">
-                <img src="https://via.placeholder.com/400x250/10b981/ffffff?text=Calculadora" class="card-image">
+            <article class="card" onclick="verDetalle(this)">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAaHpU4VA2cL5xlUsYgcjKIwswMhd1yvefGOUeezMFUwEqt76uDwZIYvBxwvOSBNeeNPYfLRSqWicSxyMUU5yuNCSdYe_xu2Z-HrzisjhrkXJVQF-zCK5XLG0NdVmkUJsXbRQJ-D0fFxQ/s1600/02-calculadora-casio-2019-wrdz-888.jpg" class="card-image">
                 <div class="card-content">
                     <span class="badge badge-found">Encontrado</span>
                     <h3 class="card-title">Calculadora Casio</h3>
                     <div class="card-info"><span class="icon-pin"></span> Cafetería Central</div>
                     <div class="card-info"><span class="icon-calendar"></span> Ayer, 2:30 PM</div>
-                    <div class="card-footer"><a href="#" class="btn-contact">Es mía</a></div>
+                    <div class="card-footer"><button class="btn-contact">Ver Información</button></div>
                 </div>
             </article>
+
         </div>
     </main>
 
     <div class="modal-overlay" id="reportModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Nuevo Reporte</h2>
-                <button class="close-btn" onclick="closeModal()">×</button>
+                <h2>Crear Reporte</h2>
+                <button class="close-btn" onclick="closeFormModal()">×</button>
             </div>
             <form onsubmit="addItem(event)">
                 <div class="form-group">
-                    <label>¿Qué es?</label>
+                    <label>¿Qué objeto es?</label>
                     <input type="text" id="itemTitle" placeholder="Ej: Llaves de carro" required>
                 </div>
                 <div class="form-group">
@@ -154,23 +152,47 @@
                         <option value="found">Lo encontré</option>
                     </select>
                 </div>
-                
                 <div class="form-group">
-                    <label>Foto del objeto (Opcional)</label>
+                    <label>Foto (Opcional)</label>
                     <input type="file" id="itemImage" accept="image/*">
                 </div>
-
                 <div class="form-group">
-                    <label>Lugar</label>
-                    <input type="text" id="itemLocation" placeholder="Ej: Baños del edificio A" required>
+                    <label>Ubicación / Edificio</label>
+                    <input type="text" id="itemLocation" placeholder="Ej: Biblioteca Piso 2" required>
                 </div>
-                <button type="submit" class="btn-submit">Publicar Reporte</button>
+                <button type="submit" class="btn-submit">Publicar en el Muro</button>
             </form>
         </div>
     </div>
 
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal-content">
+            <button class="close-btn" style="position: absolute; top: 1.5rem; right: 1.5rem;" onclick="closeDetailModal()">×</button>
+            
+            <img id="detailImage" src="" alt="Detalle">
+            
+            <div style="margin-bottom: 1rem;">
+                <span id="detailBadge" class="badge"></span>
+            </div>
+            
+            <h2 id="detailTitle" style="margin: 0 0 1rem 0; font-size: 1.8rem; color: var(--text-dark);"></h2>
+            
+            <div class="detail-row">
+                <span class="detail-label">Lugar:</span>
+                <span id="detailLocation" style="font-weight: 500;"></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Fecha:</span>
+                <span id="detailTime">Ahora mismo</span>
+            </div>
+            
+            <hr style="border: 0; border-top: 1px solid #F3F4F6; margin: 1.5rem 0;">
+            
+            <button class="btn-submit" id="detailBtn">Contactar</button>
+        </div>
+    </div>
+
     <script>
-    
         function filterItems() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const cards = document.querySelectorAll('.card');
@@ -185,10 +207,46 @@
             });
         }
 
-        const modal = document.getElementById('reportModal');
-        function openModal() { modal.classList.add('active'); }
-        function closeModal() { modal.classList.remove('active'); }
-        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        const formModal = document.getElementById('reportModal');
+        const detailModal = document.getElementById('detailModal');
+
+        function openFormModal() { formModal.classList.add('active'); }
+        function closeFormModal() { formModal.classList.remove('active'); }
+        function closeDetailModal() { detailModal.classList.remove('active'); }
+
+        window.onclick = function(event) {
+            if (event.target == formModal) closeFormModal();
+            if (event.target == detailModal) closeDetailModal();
+        }
+
+        function verDetalle(cardElement) {
+            const img = cardElement.querySelector('.card-image').src;
+            const badge = cardElement.querySelector('.badge');
+            const title = cardElement.querySelector('.card-title').innerText;
+            const infos = cardElement.querySelectorAll('.card-info');
+            const location = infos[0].innerText; 
+            const time = infos[1].innerText;     
+            
+            document.getElementById('detailImage').src = img;
+            
+            const detailBadge = document.getElementById('detailBadge');
+            detailBadge.className = badge.className; 
+            detailBadge.innerText = badge.innerText;
+            
+            document.getElementById('detailTitle').innerText = title;
+            document.getElementById('detailLocation').innerText = location;
+            document.getElementById('detailTime').innerText = time;
+
+            const btn = document.getElementById('detailBtn');
+            if(badge.classList.contains('badge-lost')) {
+                btn.innerText = "Tengo información";
+                btn.style.backgroundColor = "#EF4444";
+            } else {
+                btn.innerText = "Es mío (Reclamar)";
+                btn.style.backgroundColor = "#10B981";
+            }
+            detailModal.classList.add('active');
+        }
 
         function addItem(event) {
             event.preventDefault();
@@ -201,32 +259,25 @@
             const isLost = type === 'lost';
             const badgeClass = isLost ? 'badge-lost' : 'badge-found';
             const badgeText = isLost ? 'Perdido' : 'Encontrado';
-            const btnText = isLost ? 'Tengo información' : 'Es mío';
-            const defaultColor = isLost ? 'ef4444' : '10b981'; 
+            const btnText = 'Ver Información';
+            const defaultColor = isLost ? 'EF4444' : '10B981'; 
 
             let imageUrl;
             if (imageInput.files && imageInput.files[0]) {
-             
                 imageUrl = URL.createObjectURL(imageInput.files[0]);
             } else {
                 imageUrl = `https://via.placeholder.com/400x250/${defaultColor}/ffffff?text=${encodeURIComponent(title)}`;
             }
 
             const newCardHTML = `
-                <article class="card">
+                <article class="card" onclick="verDetalle(this)">
                     <img src="${imageUrl}" class="card-image">
                     <div class="card-content">
                         <span class="badge ${badgeClass}">${badgeText}</span>
                         <h3 class="card-title">${title}</h3>
-                        <div class="card-info">
-                            <span class="icon-pin"></span> ${location}
-                        </div>
-                        <div class="card-info">
-                            <span class="icon-calendar"></span> Ahora mismo
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn-contact">${btnText}</a>
-                        </div>
+                        <div class="card-info"><span class="icon-pin"></span> ${location}</div>
+                        <div class="card-info"><span class="icon-calendar"></span> Ahora mismo</div>
+                        <div class="card-footer"><button class="btn-contact">${btnText}</button></div>
                     </div>
                 </article>
             `;
@@ -234,11 +285,9 @@
             const grid = document.getElementById('itemsGrid');
             grid.insertAdjacentHTML('afterbegin', newCardHTML);
 
-            closeModal();
+            closeFormModal();
             event.target.reset();
-            alert("¡Reporte con foto publicado!");
         }
     </script>
-
 </body>
 </html>
